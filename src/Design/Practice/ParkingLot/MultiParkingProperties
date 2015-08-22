@@ -1,0 +1,14 @@
+# Properties file for multi floor parking system
+
+#floor specific
+number_of_floors=2
+floor_1_total_slots=10
+floor_1_compact_slot=3
+floor_1_large_slot=4
+floor_1_handicapped_slot=3
+floor_1_total_slots=10
+floor_1_compact_slot=3
+floor_1_large_slot=4
+floor_1_handicapped_slot=3
+
+#

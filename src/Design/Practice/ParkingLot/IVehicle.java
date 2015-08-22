@@ -6,9 +6,5 @@ package Design.Practice.ParkingLot;
 public interface IVehicle {
     public void park(ParkingType type);
     public void unpark();
-    public String getRegistrationNumber();
-    public long getEnterTime();
-    public long getExitTime();
-    public void setEnterTime(long time);
-    public void setExitTime(long time);
+    public String registrationNumber();
 }

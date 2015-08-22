@@ -1,36 +1,12 @@
 package Design.Practice.ParkingLot;
 
-import java.util.Objects;
-
 /**
  * Created by prashantgolash on 8/20/15.
  */
 public class GeneralVehicle implements IVehicle {
 
     private String registrationNumber;
-    private long enterTime;
-    private long exitTime;
     private MultiFloorParkingSystem parkingSystem;
-
-
-    @Override
-    public long getEnterTime() {
-        return enterTime;
-    }
-
-    public void setEnterTime(long enterTime) {
-        this.enterTime = enterTime;
-    }
-
-    @Override
-    public long getExitTime() {
-        return exitTime;
-    }
-
-    public void setExitTime(long exitTime) {
-        this.exitTime = exitTime;
-    }
-
 
     public void park(ParkingType type) {
         ParkingSlot slot = parkingSystem.getParking(type);
@@ -43,7 +19,7 @@ public class GeneralVehicle implements IVehicle {
         parkingSystem.unParkAction(this);
     }
 
-    public String getRegistrationNumber() {
+    public String registrationNumber() {
         return registrationNumber;
     }
 
@@ -53,7 +29,7 @@ public class GeneralVehicle implements IVehicle {
             return false;
         } else {
             IVehicle v = (IVehicle) o;
-            return registrationNumber.equals(v.getRegistrationNumber());
+            return registrationNumber.equals(v.registrationNumber());
         }
     }
 
