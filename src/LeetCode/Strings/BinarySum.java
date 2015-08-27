@@ -1,4 +1,4 @@
-package LeetCode.Bitwise;
+package LeetCode.Strings;
 
 /**
  * Created by prashant on 8/25/2015.
