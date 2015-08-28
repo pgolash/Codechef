@@ -22,30 +22,28 @@ public class BuyAndSellStockIII {
         maxToRight[prices.length - 1] = prices[prices.length - 1];
 
         for (int i = 1; i <= prices.length - 1; i++) {
-
             if (globalMinimum > prices[i]) {
                 globalMinimum = prices[i];
             }
-
             minToLeft[i] = globalMinimum;
         }
 
         for (int i = prices.length - 2; i >= 0; i--) {
-
             if (globalMaximum < prices[i]) {
                 globalMaximum = prices[i];
             }
-
             maxToRight[i] = globalMaximum;
         }
 
+        int maxProfitInLeft = 0;
 
         for (int i = 0; i < prices.length; i++) {
-            maxGain = Math.max(maxGain, (prices[i] - minToLeft[i]) + (maxToRight[i] - prices[i]));
+            maxGain = Math.max(maxGain, maxProfitInLeft + (maxToRight[i] - prices[i]));
+            maxProfitInLeft = Math.max(maxProfitInLeft, prices[i] - minToLeft[i]);
         }
 
+        maxGain = Math.max(maxGain, maxProfitInLeft);
         return maxGain;
-
     }
 
     public static void main(String[] args) {
