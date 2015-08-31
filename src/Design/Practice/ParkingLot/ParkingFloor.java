@@ -19,13 +19,13 @@ public class ParkingFloor {
         int idx = 0;
         int cnt = 0;
 
-        for (Map.Entry<ParkingType, Integer> entry : parkingTypeToCount) {
+        for (Map.Entry<ParkingType, Integer> entry : parkingTypeToCount.entrySet()) {
             cnt += entry.getValue();
         }
 
         slots = new ParkingSlot[cnt];
 
-        for (Map.Entry<ParkingType, Integer> entry : parkingTypeToCount) {
+        for (Map.Entry<ParkingType, Integer> entry : parkingTypeToCount.entrySet()) {
 
             ParkingType type = entry.getKey();
 
