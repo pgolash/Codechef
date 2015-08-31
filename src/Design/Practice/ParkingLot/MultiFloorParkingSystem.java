@@ -1,5 +1,6 @@
 package Design.Practice.ParkingLot;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,18 +16,25 @@ public class MultiFloorParkingSystem implements IParkingSystem {
     private static MultiFloorParkingSystem multiFloorParkingSystem = null;
 
     private MultiFloorParkingSystem(int numFloors) {
+        Map<ParkingType, Integer> typeToCount = new HashMap<>();
+        typeToCount.put(ParkingType.COMPACT, 10);
+        typeToCount.put(ParkingType.HANDICAPPED, 10);
+        typeToCount.put(ParkingType.LARGE, 10);
+
+        parkingFloors = new ParkingFloor[numFloors];
 
         // allocate slots of each parking type according to requirement
-        int
+        for (int i = 1; i <= numFloors; i++) {
 
-
+            parkingFloors[i] = new ParkingFloor(typeToCount, i);
+        }
     }
 
 
     public static MultiFloorParkingSystem getInstance() {
 
         if (multiFloorParkingSystem == null) {
-            multiFloorParkingSystem = new MultiFloorParkingSystem();
+            multiFloorParkingSystem = new MultiFloorParkingSystem(DEFAULT_NUM_PARKING_FLOORS);
         }
 
         return multiFloorParkingSystem;
@@ -63,6 +71,7 @@ public class MultiFloorParkingSystem implements IParkingSystem {
     }
 
     public double getCharging(IVehicle v) {
-        return ((v.getExitTime() - v.getEnterTime()) / 1000 * 60 * 60) % 24 * PARKING_RATE_HOUR;
+        ParkingSlot slot = parkedVehicles.get(v);
+        return ((slot.getCurrentVehicleExitTime() - slot.getCurrentVehicleExitTime()) / 1000 * 60 * 60) % 24 * DEFAULT_PARKING_RATE_HOUR;
     }
 }
