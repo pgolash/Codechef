@@ -1,4 +1,4 @@
-package Design.Practice;
+package Design.Generics;
 
 import java.io.InvalidClassException;
 import java.util.*;
