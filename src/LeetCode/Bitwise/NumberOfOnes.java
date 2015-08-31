@@ -5,15 +5,16 @@ package LeetCode.Bitwise;
  */
 public class NumberOfOnes {
     public int hammingWeight(int n) {
-        int weight = 0;
-        while (n != 0) {
-            if ((n & 1) == 1) {
-                weight++;
-                n >>= 1;
+        int count = 0;
+        for(int i=1; i<33; i++){
+            if(getBit(n, i) == true){
+                count++;
             }
         }
+        return count;
+    }
 
-        return weight;
-
+    public boolean getBit(int n, int i){
+        return (n & (1 << i)) != 0;
     }
 }
