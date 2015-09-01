@@ -6,7 +6,6 @@ import java.util.Map;
  * Created by prashantgolash on 8/21/15.
  */
 /*
-
  */
 public class ParkingFloor {
     private ParkingSlot[] slots;

@@ -10,6 +10,10 @@ public class MultiFloorParkingSystem implements IParkingSystem {
 
     private ParkingFloor[] parkingFloors;
     private Map<IVehicle, ParkingSlot> parkedVehicles;
+
+    /*
+     *       TBD : to be initialized from properties
+     */
     private static final double DEFAULT_PARKING_RATE_HOUR = 3;
     private static final int DEFAULT_NUM_PARKING_FLOORS = 5;
 
