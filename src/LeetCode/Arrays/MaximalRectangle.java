@@ -5,6 +5,13 @@ package LeetCode.Arrays;
  */
 public class MaximalRectangle {
 
+    public static void main(String[] args) {
+        char[][] myChar = new char[1][2];
+        myChar[0] = new char[] {'1', '0'};
+        new MaximalRectangle().maximalRectangle(myChar);
+
+    }
+
     class Dimension {
         int length;
         int height;
@@ -37,50 +44,36 @@ public class MaximalRectangle {
             for (int j = 0; j < colLength; j++) {
                 if (matrix[i][j] == '1') {
                     dimensions[i][j].length = dimensions[i][j].height = 1;
-                    if (i >= 1) {
-                        dimensions[i][j].length += dimensions[i - 1][j].length;
-                    }
                     if (j >= 1) {
-                        dimensions[i][j].height += dimensions[i][j - 1].height;
+                        dimensions[i][j].length += dimensions[i][j - 1].length;
+                    }
+                    if (i >= 1) {
+                        dimensions[i][j].height += dimensions[i - 1][j].height;
                     }
                 }
             }
         }
 
-        for (int i = 0; i < rowLength; i++) {
-            for (int j = 0; j < colLength; j++) {
-                if (matrix[i][j] == '1') {
-                    dimensions[i][j].length = dimensions[i][j].height = 1;
-                    if (i >= 1) {
-                        dimensions[i][j].length += dimensions[i - 1][j].length;
-                    }
-                    if (j >= 1) {
-                        dimensions[i][j].height += dimensions[i][j - 1].height;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < rowLength; i++) {
-            for (int j = 0; j < colLength; j++) {
+        for (int j = 0; j < colLength; j++) {
+            for (int i = 0; i < rowLength; i++) {
 
                 int heightToGo = dimensions[i][j].height;
-                int currJ = j;
+                int currI = i;
                 int currLength = dimensions[i][j].length;
 
-                currJ--;
+                maxArea = Math.max(maxArea, currLength);
 
-                while (currJ >= 0 && heightToGo >= 2) {
-                    currLength = Math.min(currLength, dimensions[i][currJ].length);
+                currI--;
+
+                while (currI >= 0 && heightToGo >= 2) {
+                    currLength = Math.min(currLength, dimensions[currI][j].length);
                     if (currLength == 0) {
                         break;
                     }
-                    currJ--;
+                    maxArea = Math.max(maxArea, currLength * (i - currI + 1));
+                    currI--;
                     heightToGo--;
                 }
-
-                maxArea = Math.max(maxArea, currLength * dimensions[i][j].height);
-
             }
         }
 
