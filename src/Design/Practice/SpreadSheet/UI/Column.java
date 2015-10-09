@@ -1,18 +1,18 @@
 package Design.Practice.SpreadSheet.UI;
 
 import Design.Practice.SpreadSheet.DataModel.Content;
+import LeetCode.Arrays.ExcelToColumnNumber;
+import LeetCode.Tree.IterativePostOrderTraversal;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Iterator;
+import java.util.List;
 
 /**
- * Created by prashantgolash on 9/26/15.
+ * Created by prashantgolash on 9/30/15.
  */
-public class Cell implements UIElement {
+public class Column implements UIElement {
 
-    private JTextField _dataField;
+    private List<UIElement> _elements;
 
     public void setContent(Content c) throws Exception{
         throw new Exception("no updated");
@@ -26,11 +26,12 @@ public class Cell implements UIElement {
         throw new Exception("no updated");
     }
 
-    public Iterator<UIElement> getIterator() throws Exception {
-        throw new Exception("not implemented");
+    public Iterator<UIElement> getIterator() {
+        return _elements.iterator();
     }
 
     public boolean isLeaf() {
-        return true;
+        return false;
     }
+
 }

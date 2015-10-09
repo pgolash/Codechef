@@ -1,5 +1,7 @@
 package Design.Practice.SpreadSheet.Commands;
 
+import Design.Practice.SpreadSheet.UI.UIElement;
+
 import java.io.Serializable;
 
 /**
@@ -11,7 +13,7 @@ import java.io.Serializable;
     // applying formula to a cell, changing font of a cell(s)
     // table control which would change the sheet's content
 public interface ICommand extends Serializable {
-    public boolean execute();
-    public boolean undo();
+    public boolean execute(UIElement elem);
+    public boolean undo(UIElement elem);
     public String toString();
 }

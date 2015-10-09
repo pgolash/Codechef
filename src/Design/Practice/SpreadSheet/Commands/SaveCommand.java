@@ -1,12 +1,13 @@
 package Design.Practice.SpreadSheet.Commands;
 
 import Design.Practice.SpreadSheet.Commands.ICommand;
+import Design.Practice.SpreadSheet.UI.UIElement;
 
 /**
  * Created by prashantgolash on 9/26/15.
  */
 public class SaveCommand implements ICommand {
-    public boolean execute() {
+    public boolean execute(UIElement elem) {
         // Store previous cells and data
         // Clipboard data = SelectionRange.data;
         // Serialize the data
@@ -16,7 +17,7 @@ public class SaveCommand implements ICommand {
         return true;
     }
 
-    public boolean undo() {
+    public boolean undo(UIElement elem) {
         // nothing to be done
         return true;
     }

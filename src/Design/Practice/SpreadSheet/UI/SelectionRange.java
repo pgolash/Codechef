@@ -1,18 +1,26 @@
 package Design.Practice.SpreadSheet.UI;
 
 import Design.Practice.SpreadSheet.DataModel.Content;
+import Design.Practice.SpreadSheet.DataModel.Range;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 /**
- * Created by prashantgolash on 9/26/15.
+ * Created by prashantgolash on 10/8/15.
  */
-public class Cell implements UIElement {
+public class SelectionRange implements UIElement {
 
-    private JTextField _dataField;
+    private int startX;
+    private int startY;
+    private int numRows;
+    private int numCols;
+
+    SelectionRange(Range r) {
+        this.startX = r.getStartX();
+        this.startY = r.getStartY();
+        this.numRows = r.getNumRows();
+        this.numCols = r.getNumCols();
+    }
 
     public void setContent(Content c) throws Exception{
         throw new Exception("no updated");
@@ -31,6 +39,6 @@ public class Cell implements UIElement {
     }
 
     public boolean isLeaf() {
-        return true;
+        return false;
     }
 }
