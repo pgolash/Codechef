@@ -12,11 +12,13 @@ public class SelectionRange implements UIElement {
 
     class MyIterator implements Iterator<UIElement> {
         public boolean hasNext() {
-
+            // first it returns the row idx
+            // next it returns the col idx
+            return true;
         }
 
         public UIElement next() {
-
+            return matrix[0][0];
         }
     }
 
