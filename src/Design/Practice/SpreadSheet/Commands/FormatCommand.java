@@ -10,7 +10,7 @@ public class FormatCommand implements ICommand {
     public boolean execute(UIElement element) {
         // Store previous cells and data
         // Clipboard data = SelectionRange.data;
-        System.out.println("Execute paste command");
+        System.out.println("Execute format command");
         return true;
     }
 
@@ -20,7 +20,7 @@ public class FormatCommand implements ICommand {
     }
 
     public String toString() {
-        return "Paste command";
+        return "Format command";
     }
 
 }
