@@ -1,5 +1,7 @@
 package Design.Generics;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,7 +15,7 @@ public class TestGenerics {
 
     interface B extends A {
         public void print1();
-        public void print();
+        //public void print();
     }
 
     class C implements B {
@@ -26,11 +28,14 @@ public class TestGenerics {
     }
 
     public static void main(String[] args) {
-
-        Integer int1 = 12;
-        Object o = int1;
-
-        System.out.println(o.getClass());
-
     }
+
+    public <T> void max(List<T> lt) {
+        lt.set(0, lt.get(0));
+    }
+
+
+
+
+
 }

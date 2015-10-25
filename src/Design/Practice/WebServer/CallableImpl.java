@@ -1,22 +1,34 @@
 package Design.Practice.WebServer;
 
+import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
+import javax.xml.ws.spi.http.HttpHandler;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.concurrent.Callable;
 
 /**
  * Created by prashantgolash on 9/13/15.
  */
-public class CallableImpl<V> implements Callable<V>{
-    CallableImpl(SocialHttpServer s) {
+public class CallableImpl implements Callable{
 
+    SocialHttpServer _server = null;
+    Socket _socket = null;
 
+    CallableImpl(SocialHttpServer s, Socket sock) {
+        _server = s;
+        _socket = sock;
     }
 
-    public V call() {
-        V t = null;
+    public Object call() {
+        String endPoint = _socket.getChannel().toString();
+        //HttpExchange exchange = _socket.getChannel();
+        HashMap<String, com.sun.net.httpserver.HttpHandler> endMap = (HashMap)_server.getHandlers();
 
-        return t;
+        //endMap.get(endPoint).handle();
+
+        return null;
+
     }
 }

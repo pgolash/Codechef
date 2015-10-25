@@ -12,6 +12,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,13 +25,15 @@ import java.util.concurrent.Future;
 public class SocialHttpServer {
 
     private static final int port = 1100;
+    private static final int _numThreads = 20;
     private ServerSocket _socket = null;
     private ExecutorService _executorService = null;
     private final Map<String, HttpHandler> _handlers;
+    private Stack<Future> _stack = null;
 
     SocialHttpServer() throws Exception {
         _socket = new ServerSocket(port);
-        _executorService = Executors.newFixedThreadPool(10);
+        _executorService = Executors.newFixedThreadPool(_numThreads);
         _handlers =  new HashMap<>();
 
         HttpHandler tweetHandler = new TweetHandler();
@@ -38,18 +41,19 @@ public class SocialHttpServer {
 
         _handlers.put("/tweet", tweetHandler);
         _handlers.put("/facebook", facebookHandler);
+        _stack = new Stack<>();
     }
 
-    public Map getHandlers() {
-        return _handlers;
+    public Object getHandlers() {
+        return ((HashMap)_handlers).clone();
     }
 
     public void start() throws Exception {
-
         while (true) {
             Socket s = _socket.accept();
-            CallableImpl<String> c = new CallableImpl<>(this);
-            Future<String> f = _executorService.submit(c);
+            CallableImpl c = new CallableImpl(this, s);
+            Future<Object> f = _executorService.submit(c);
+            _stack.push(f);
         }
     }
 
@@ -60,6 +64,5 @@ public class SocialHttpServer {
         } catch (Exception e) {
             System.out.println("test");
         }
-
     }
 }
