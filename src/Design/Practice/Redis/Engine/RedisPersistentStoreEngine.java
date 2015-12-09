@@ -1,30 +1,30 @@
 package Design.Practice.Redis.Engine;
 
+import Design.Practice.Redis.DataLayer.DataStorage;
 import Design.Practice.Redis.DataLayer.MapData;
 
-import java.util.Stack;
+import java.util.*;
 
-/**
- * Created by prashantgolash on 10/26/15.
- */
 public class RedisPersistentStoreEngine implements IPersistentStoreEngine {
 
-    private Stack<MapData> _contextStack;
-    private MapData _persistentData;
-    private MapData _topContext;
+    private Stack<DataStorage> _contextStack;
+    private DataStorage _persistentContext;
+    private DataStorage _topTransactionContext;
     private static RedisPersistentStoreEngine _instance = null;
 
     public void initializeContext() {
-        MapData tempData = new MapData();
-        _contextStack.push(_topContext);
-        _topContext = tempData;
+        DataStorage tempData = new MapData();
+        if (_topTransactionContext != null) {
+            _contextStack.push(_topTransactionContext);
+        }
+        _topTransactionContext = tempData;
     }
 
 
     private RedisPersistentStoreEngine() {
-        _persistentData = new MapData();
-        _contextStack = null;
-        _topContext = null;
+        _persistentContext = new MapData();
+        _contextStack = new Stack<>();
+        _topTransactionContext = null;
     }
 
     public void executeCommand(String command) throws UnsupportedOperationException {
@@ -41,6 +41,7 @@ public class RedisPersistentStoreEngine implements IPersistentStoreEngine {
                 get(tokenizers[1], isTransaction);
                 break;
             case "NUMEQUALTO":
+                numEqualsTo(tokenizers[1], isTransaction);
                 break;
             case "BEGIN":
                 initializeContext();
@@ -59,6 +60,8 @@ public class RedisPersistentStoreEngine implements IPersistentStoreEngine {
         }
     }
 
+
+    // Singleton instance of Redis Engine
     public static RedisPersistentStoreEngine getInstance() {
         if (_instance == null) {
             _instance = new RedisPersistentStoreEngine();
@@ -67,57 +70,108 @@ public class RedisPersistentStoreEngine implements IPersistentStoreEngine {
     }
 
     public void set(String key, String val, boolean isTransaction) {
-        int localVersion = -1;
         if (isTransaction) {
-            int persistentVersion = _persistentData.getVersion(key);
-            localVersion = persistentVersion + 1;
-            _topContext.storeKey(key, val, localVersion);
+            int persistentVersion = _persistentContext.getVersion(key);
+            int localVersion = persistentVersion + 1;
+            _topTransactionContext.storeKey(key, val, localVersion);
         } else {
-            _persistentData.storeKey(key, val, -1);
+            _persistentContext.storeKey(key, val, 0);
         }
     }
 
     public void unset(String key, boolean isTransaction) {
-        set(key, null, isTransaction);
+        if (isTransaction) {
+            set(key, null, isTransaction);
+        } else {
+            _persistentContext.deleteKey(key);
+        }
     }
 
-    public String get(String key, boolean isTransaction) {
+    public void get(String key, boolean isTransaction) {
         int localVersion = -1;
         int persistentVersion = -1;
         if (isTransaction) {
-            localVersion = _topContext.getVersion(key);
-            persistentVersion = _persistentData.getVersion(key);
-            if (persistentVersion >= localVersion) {
-                return _persistentData.getData(key);
-            } else {
-                return _topContext.getData(key);
-            }
+            localVersion = _topTransactionContext.getVersion(key);
+            persistentVersion = _persistentContext.getVersion(key);
+            System.out.println(persistentVersion >= localVersion ? _persistentContext.getData(key) : _topTransactionContext.getData(key));
         } else {
-            return _persistentData.getData(key);
+            System.out.println(_persistentContext.getData(key));
         }
     }
 
-    public String numEqualTo(String value, boolean isTransaction) {
-        int localVersion = -1;
-        int persistentVersion = -2;
+    public void numEqualsTo(String value, boolean isTransaction) {
         if (isTransaction) {
+            Set<String> localKeys = _topTransactionContext.valToKeySet(value);
+            Set<String> persistentKeys = _persistentContext.valToKeySet(value);
+            int cnt = 0;
+            for (String lKey : localKeys) {
+                if (persistentKeys.contains(lKey)) {
+                    cnt++;
+                    continue;
+                } else {
+                    int persistentVersion = _persistentContext.getVersion(lKey);
+                    int localVersion = _topTransactionContext.getVersion(lKey);
+
+                    if (localVersion > persistentVersion) {
+                        cnt++;
+                    }
+                }
+            }
+
+            for (String pKey : persistentKeys) {
+                if (!localKeys.contains(pKey)) {
+                    cnt++;
+                }
+            }
+
+            System.out.println(cnt);
         } else {
+            System.out.println(_persistentContext.valToKeySet(value).size());
         }
+
+
     }
 
     public void rollback() {
-        _topContext.clean();
+        boolean anyTransaction = false;
+
+        while (_topTransactionContext.keyIterator().hasNext()) {
+            String lKey = _topTransactionContext.keyIterator().next();
+            int lVersion = _topTransactionContext.getVersion(lKey);
+            int pVersion = _persistentContext.getVersion(lKey);
+            if (pVersion < lVersion) {
+                anyTransaction = true;
+                break;
+            }
+        }
+
+        if (!anyTransaction) {
+            System.out.println("NO TRANSACTION");
+        }
     }
 
     public void commit() {
-        while(_topContext.keyIterator().hasNext()) {
-            String key = _topContext.keyIterator().next();
-            int version = _persistentData.getVersion(key);
-            _persistentData.storeKey(key, _topContext.getData(key), version + 1);
+        if (_topTransactionContext.getSize() == 0) {
+            System.out.println("NO TRANSACTION");
+        } else {
+            while (_topTransactionContext.keyIterator().hasNext()) {
+                String key = _topTransactionContext.keyIterator().next();
+                if (_topTransactionContext.getData(key) == null) {
+                    _persistentContext.deleteKey(key);
+                } else {
+                    int version = _persistentContext.getVersion(key);
+                    _persistentContext.storeKey(key, _topTransactionContext.getData(key), version + 1);
+                }
+            }
+        }
+        _topTransactionContext.clean();
+        if (!_contextStack.isEmpty()) {
+            _topTransactionContext = _contextStack.pop();
         }
     }
 
     public void end() {
-
+        _persistentContext.clean();
+        _contextStack.empty();
     }
 }

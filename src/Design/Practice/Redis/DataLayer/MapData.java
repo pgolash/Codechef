@@ -1,15 +1,11 @@
 package Design.Practice.Redis.DataLayer;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
-/**
- * Created by prashantgolash on 10/26/15.
- */
 public class MapData implements DataStorage {
 
     private Map<String, Value> _data;
+    private Map<String, Set<String>> _reverseData;
 
     class Value {
         String val;
@@ -23,49 +19,61 @@ public class MapData implements DataStorage {
 
     public MapData() {
         _data = new HashMap<>();
+        _reverseData = new HashMap<>();
     }
 
     public void storeKey(String key, String value, int version) {
-        if (value != null) {
-            Value v = new Value(value, version);
-            _data.put(key, v);
-        } else {
-            if (_data.containsKey(key)) {
-                deleteKey(key);
-            }
+        deleteKey(key);
+        Value v = new Value(value, version);
+        _data.put(key, v);
+
+        Set<String> s = _reverseData.get(v.val);
+        if (s == null) {
+            s = new HashSet<>();
         }
+        s.add(key);
     }
 
     public int getVersion(String key) {
-        if (!_data.containsKey(key)) {
-            return -1;
-        } else {
-            return _data.get(key).version;
-        }
+        return _data.containsKey(key) ?  -1 : _data.get(key).version;
     }
 
     public String getData(String key) {
-        if (!_data.containsKey(key)) {
-            return null;
-        } else {
-            return _data.get(key).val;
-        }
+        return _data.containsKey(key) ? _data.get(key).val : null;
     }
 
-    public boolean hasKey(String key) {
+    public boolean containsKey(String key) {
         return _data.containsKey(key);
     }
 
     public void deleteKey(String key) {
-        _data.remove(key);
+        if (_data.containsKey(key)) {
+            String val = _data.get(key).val;
+            Set<String> keySet = _reverseData.get(val);
+
+            keySet.remove(key);
+            if (keySet.isEmpty()) {
+                _reverseData.remove(val);
+            }
+
+            _data.remove(key);
+        }
     }
 
     public void clean() {
         _data.clear();
+        _reverseData.clear();
+    }
+
+    public int getSize() {
+        return _data.size();
     }
 
     public Iterator<String> keyIterator() {
         return _data.keySet().iterator();
     }
 
+    public Set<String> valToKeySet(String val) {
+        return _reverseData.get(val);
+    }
 }
