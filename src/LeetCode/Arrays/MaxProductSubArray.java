@@ -28,55 +28,42 @@ public class MaxProductSubArray {
 
     }
 
-    public int maxProduct(int[] nums) {
+    public int maxProduct(int[] arr) {
 
-        if (nums == null || nums.length == 0) {
+        if (arr == null || arr.length == 0) {
             return 0;
         } else {
+            int maxP = Integer.MIN_VALUE;
+            int neg = 1;
+            int pos = 1;
 
-            int maxProduct = Integer.MIN_VALUE;
-
-            int currNegProduct = Integer.MIN_VALUE;
-            int currPosProduct = Integer.MIN_VALUE;
-
-            for (int i = 0; i < nums.length; i++) {
-                if (nums[i] < 0) {
-
-                    int temp = currNegProduct;
-
-                    if (currPosProduct != Integer.MIN_VALUE) {
-                        currNegProduct = currPosProduct * nums[i];
+            for (int i = 0; i < arr.length; i++) {
+                int temp;
+                if (arr[i] < 0) {
+                    if (neg > 0) {
+                        temp = 1;
+                        maxP = Math.max(maxP, arr[i]);
                     } else {
-                        currNegProduct = nums[i];
+                        temp = neg * arr[i];
+                        maxP = Math.max(maxP, temp);
                     }
-
-                    if (temp != Integer.MIN_VALUE) {
-                        currPosProduct = temp * nums[i];
-                    } else {
-                        currPosProduct = Integer.MIN_VALUE;
-                    }
-
-                    maxProduct = Math.max(Math.max(currPosProduct, maxProduct), currNegProduct);
-                } else if (nums[i] > 0) {
-
-                    if (currPosProduct == Integer.MIN_VALUE) {
-                        currPosProduct = 1;
-                    }
-
-                    currPosProduct *= nums[i];
-
-                    if (currNegProduct != Integer.MIN_VALUE) {
-                        currNegProduct *= nums[i];
-                    }
-
-                    maxProduct = Math.max(currPosProduct, maxProduct);
+                    neg = pos * arr[i];
+                    pos = temp;
+                } else if (arr[i] == 0) {
+                    pos = 1;
+                    neg = 1;
+                    maxP = Math.max(maxP, 0);
                 } else {
-                    maxProduct = Math.max(0, maxProduct);
-                    currNegProduct = currPosProduct = Integer.MIN_VALUE;
+                    if (neg < 0) {
+                        neg *= arr[i];
+                    }
+                    pos = pos * arr[i];
+                    maxP = Math.max(maxP, pos);
                 }
             }
 
-            return maxProduct;
+            return maxP;
         }
+
     }
 }

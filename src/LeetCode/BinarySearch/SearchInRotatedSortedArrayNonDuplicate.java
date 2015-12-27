@@ -1,4 +1,4 @@
-package LeetCode.RotatedSortedArrays;
+package LeetCode.BinarySearch;
 
 /**
  * Created by prashantgolash on 9/22/15.

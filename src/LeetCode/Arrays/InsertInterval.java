@@ -42,15 +42,11 @@ public class InsertInterval {
         } else if (newInterval == null) {
             return intervals;
         } else {
-
             List<Interval> myL = new ArrayList<>();
-            Interval mergedInterval = null;
-
             for (Interval currInterval : intervals) {
                 if (newInterval != null) {
                     if (isIntersecting(newInterval, currInterval)) {
-                        mergedInterval = mergeIntervals(newInterval, currInterval);
-                        newInterval = null;
+                        newInterval = mergeIntervals(newInterval, currInterval);
                     } else {
                         if (newInterval.end < currInterval.start) {
                             myL.add(newInterval);
@@ -59,27 +55,12 @@ public class InsertInterval {
                         myL.add(currInterval);
                     }
                 } else {
-
-                    if (isIntersecting(mergedInterval, currInterval)) {
-                        mergedInterval = mergeIntervals(mergedInterval, currInterval);
-                    } else {
-                        if (mergedInterval != null) {
-                            myL.add(mergedInterval);
-                            mergedInterval = null;
-                        }
-                        myL.add(currInterval);
-                    }
+                    myL.add(currInterval);
                 }
             }
-
             if (newInterval != null) {
                 myL.add(newInterval);
             }
-
-            if (mergedInterval != null) {
-                myL.add(mergedInterval);
-            }
-
             return myL;
         }
 

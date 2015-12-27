@@ -9,39 +9,32 @@ public class ValidNumber {
             return false;
         }
         // trim off head and tail zeros which not affect result depend on question
-        s=s.trim();
+        s = s.trim();
         if(s.length()==0){
             return false;
         }
         boolean hasNum=false;
-
         boolean canSign=true;
-
         boolean canDot=true;
-
         boolean canE=false;
         boolean hasE=false;
 
         int i=0;
-        while(i<s.length()){
+        while(i < s.length()){
             char c=s.charAt(i++);
-
-            if (c==' '){
-
+            if (c == ' '){
                 return false;
-
             }
 
-            if (c=='+' ||c=='-'){
+            if (c == '+' || c == '-'){
                 if (!canSign){
                     return false;
                 }
                 canSign=false;
-
                 continue;
             }
 
-            if (c=='.'){
+            if (c == '.'){
                 if (!canDot){
                     return false;
                 }
@@ -50,9 +43,8 @@ public class ValidNumber {
                 continue;
             }
 
-            if (c=='e'){
-
-                if (!canE||hasE){
+            if (c == 'e'){
+                if (!canE || hasE){
                     return false;
                 }
 
@@ -61,28 +53,19 @@ public class ValidNumber {
                 hasNum=false;
                 canDot=false;
                 canSign=true;
-
                 continue;
             }
 
-
-            if (c>='0' && c<='9'){
+            if (c >= '0' && c <= '9'){
                 hasNum=true;
-
-                if (!canE&&!hasE){
+                if (!canE && !hasE){
                     canE=true;
                 }
-
                 canSign=false;
-
-
-
             }
             else{
                 return false;
             }
-
-
         }
 
         return hasNum;
