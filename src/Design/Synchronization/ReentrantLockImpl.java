@@ -3,7 +3,7 @@ package Design.Synchronization;
 /**
  * Created by prashantgolash on 10/20/15.
  */
-public class ReentrantLock {
+public class ReentrantLockImpl {
     public class Lock{
 
         boolean isLocked = false;

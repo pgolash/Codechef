@@ -1,4 +1,4 @@
-package GeeksForGeeks;
+package GeeksForGeeks.Graphs;
 
 import LeetCode.LinkedList.LinkedListCycle;
 
