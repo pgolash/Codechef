@@ -1,0 +1,22 @@
+Why REST ? :
+Current device-diversity and the numerous development platforms have made sure you don't have any other way (mostly) than to go the REST way. And new HTML5 capabilities, increase in javascript efficiency and iOS/Android native platforms have made it easier to go REST way. REST has made the server a real server as its name suggests and has been given the responsibility of doing back end stuff only. So now server just provides data and thats what it should do ! It has nothing to do with HTML, CSS and client side Javascript. So there is no JSP where web designers and server engineers both try to cram in their art ! Though CSS makes web designer's silo to play, not everything can be isolated so much in this JSP model.
+
+It's not just advantages of client/server code isolation and cleaner code,
+there are so many other advantages in this modern world of application development using RESTful style.. Of course, reader should keep in mind that the REST is a "style" not a "specification", so nothing is wrong or right in REST! (and actually I don't like to say this, sounds so clumsy but.. )
+
+Here are some of those
+RIP that troublesome session object on server side !: REST is stateless. Good REST design sends user-id and password in every request ! Or at least uses cookies in web-friendly client. So there is no need of long living session object on server side. User is authenticated every time and user data is live only for that request. In today's high performance hardware, authenticating user every time is not at all big burden compared to the advantages it brings.
+Cloud computing friendly: Advantages of above fact ? It helps us to RIP those session replication needed for failover as well ! Less memory requirements on server side because no more session objects of million of users. Plus, adding virtual machines in cloud is now does not have the complexity of adding those machines as session buddies in those jboss-like application servers ! So simple round-robin load balancing could be good enough.
+Readable and cacheable URLs :Unlike usual web application URL, where parameters are in the URL itself, REST application web URL is clean because all parameters take form of request body rather than the URL and submitted in the form of Json/XML object. Typical URL can be like http://www.example.com/appName/resource/<resource-id>. Being clean URLs, resources can be cached in better way than parameter based URLs.
+Versioning freedom (at least in pure REST) :Original definition of REST likes client application start from root URL and subsequently get URLs of further resources. It avoids client to have pre-defined sets of URLs to avoid continuous changes in client code if server URI changes. This is also calledHATEOAS(what a scary looking word by the way). It means Hypermedia As The Engine Of Application State. Server provides hypermedia as the state of the application. So even if there is any change in URLs, client does not need to know since client only follows the path provided through server provided objects.
+Practical REST :
+Though ideal/pure REST promotes HATEOAS as mentioned above, practical problem is, that the communication becomes too chatty. It may end up making hundreds of calls to just show personalized front-page for the user. So many practical people go for fixed API. They handle versioning in different ways. For example www.example.com/v2 or v2.example.com etc.
+
+For this approach, client code needs to change every time there is change in URL. But some avoid this problem by just adding new version related attributes in the payload itself. Next version clients can use those extra/new information, old version client will get the same payload but would not even know what the extra attributes are and will just keep ignoring it.
+
+
+Everywhere REST:
+Now most of the leading code generators like Spring Roo, Play framework use RESTful URLs, even in traditional model of JSP (by keeping URLs RESTful ).
+New world of Micro-Services is based on RESTful interaction between those services. New initiatives like Spring Boot helps create REST applications quickly using embedded servlet containers making micro-services easy to develop.
+Spring now now also has Async support for REST using AsyncRestTemplate.
+Almost all Javascript libraries support RESTful calls. Spring now has getting started guides for many Javascript frameworks for consuming RESTful services based on Spring as backend. For example, Spring REST with angular.js https://spring.io/guides/gs/consuming-rest-angularjs

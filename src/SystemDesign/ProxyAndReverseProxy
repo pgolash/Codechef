@@ -1,0 +1,14 @@
+An ordinary forward proxy is an intermediate server that sits between the client and the origin server.
+In order to get content from the origin server, the client sends a request to the proxy naming the origin server as the
+target and the proxy then requests the content from the origin server and returns it to the client.
+
+The client must be specially configured to use the forward proxy to access other sites.
+
+A reverse proxy (or gateway), by contrast, appears to the client just like an ordinary web server.
+No special configuration on the client is necessary.
+The client makes ordinary requests for content in the name-space of the reverse proxy.
+The reverse proxy then decides where to send those requests, and returns the content as if it was itself the origin.
+
+A typical usage of a reverse proxy is to provide Internet users access to a server that is behind a firewall.
+Reverse proxies can also be used to balance load among several back-end servers, or to provide caching for
+a slower back-end server. In addition, reverse proxies can be used simply to bring several servers into the same URL space.

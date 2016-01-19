@@ -5,23 +5,23 @@ package LeetCode.Arrays;
  */
 public class ValidNumber {
     public boolean isNumber(String s) {
-        if (s==null ){
+        if (s == null ){
             return false;
         }
         // trim off head and tail zeros which not affect result depend on question
         s = s.trim();
-        if(s.length()==0){
+        if(s.length() == 0){
             return false;
         }
-        boolean hasNum=false;
-        boolean canSign=true;
-        boolean canDot=true;
-        boolean canE=false;
-        boolean hasE=false;
+        boolean hasNum = false;
+        boolean canSign = true;
+        boolean canDot = true;
+        boolean canE = false;
+        boolean hasE = false;
 
         int i=0;
         while(i < s.length()){
-            char c=s.charAt(i++);
+            char c = s.charAt(i++);
             if (c == ' '){
                 return false;
             }
@@ -30,7 +30,7 @@ public class ValidNumber {
                 if (!canSign){
                     return false;
                 }
-                canSign=false;
+                canSign = false;
                 continue;
             }
 
@@ -38,8 +38,8 @@ public class ValidNumber {
                 if (!canDot){
                     return false;
                 }
-                canDot=false;
-                canSign=false;
+                canDot = false;
+                canSign = false;
                 continue;
             }
 
@@ -59,11 +59,10 @@ public class ValidNumber {
             if (c >= '0' && c <= '9'){
                 hasNum=true;
                 if (!canE && !hasE){
-                    canE=true;
+                    canE = true;
                 }
-                canSign=false;
-            }
-            else{
+                canSign = false;
+            } else{
                 return false;
             }
         }

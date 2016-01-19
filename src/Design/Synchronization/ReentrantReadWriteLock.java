@@ -41,8 +41,11 @@ public class ReentrantReadWriteLock{
                     " hold a read lock on this ReadWriteLock");
         }
         int accessCount = getReadAccessCount(callingThread);
-        if(accessCount == 1){ readingThreads.remove(callingThread); }
-        else { readingThreads.put(callingThread, (accessCount -1)); }
+        if(accessCount == 1) {
+            readingThreads.remove(callingThread);
+        } else {
+            readingThreads.put(callingThread, (accessCount -1));
+        }
         notifyAll();
     }
 
