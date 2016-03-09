@@ -37,32 +37,22 @@ public class InsertInterval {
 
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
 
-        if (intervals == null) {
-            return null;
-        } else if (newInterval == null) {
-            return intervals;
-        } else {
-            List<Interval> myL = new ArrayList<>();
-            for (Interval currInterval : intervals) {
-                if (newInterval != null) {
-                    if (isIntersecting(newInterval, currInterval)) {
-                        newInterval = mergeIntervals(newInterval, currInterval);
-                    } else {
-                        if (newInterval.end < currInterval.start) {
-                            myL.add(newInterval);
-                            newInterval = null;
-                        }
-                        myL.add(currInterval);
-                    }
-                } else {
-                    myL.add(currInterval);
-                }
+        ArrayList<Interval> result = new ArrayList<Interval>();
+
+        for(Interval interval: intervals){
+            if(interval.end < newInterval.start){
+                result.add(interval);
+            } else if(interval.start > newInterval.end){
+                result.add(newInterval);
+                newInterval = interval;
+            } else if(interval.end >= newInterval.start || interval.start <= newInterval.end){
+                newInterval = new Interval(Math.min(interval.start, newInterval.start), Math.max(newInterval.end, interval.end));
             }
-            if (newInterval != null) {
-                myL.add(newInterval);
-            }
-            return myL;
         }
+
+        result.add(newInterval);
+
+        return result;
 
     }
 }

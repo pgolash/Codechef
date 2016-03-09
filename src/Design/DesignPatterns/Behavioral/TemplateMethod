@@ -1,0 +1,118 @@
+Template method design pattern in java
+--------------------------------------
+
+Template method pattern is a behavioral design pattern which provide base method for algorithm,called template method
+which defers some of its steps to subclasses So algorithm structure is same but some of its steps can be redefined by
+subclasses according to context.
+
+Template means Preset format like HTML templates which has fixed preset format.Similarly in template method pattern,we have a preset structure
+method called template method which consists of steps.This steps can be abstract method which will be implemented by its subclasses.
+
+So in short you can say,In template method pattern,there is template method which defines set of steps and implementation of steps can be
+deferred to subclasses.Thus template method defines algorithm but exact steps can be defined in subclasses.
+
+When to use it:
+When you have a preset format or steps for algorithm but implementation of steps may vary.
+When you want to avoid code duplication,implementing common code in base class and variation in subclass.
+Structure:
+
+
+Components:
+
+AbstractClass
+It defines template method defining the structure of algorithm.
+It also defines abstract operations that will be implemented by subclasses to define steps of algorithm.
+
+ConcreteClass
+It implements abstract operation of super class to carry out subclass specific steps of the algorithm and also overrides operation if default
+behavior is not required. Important points about template method pattern:
+
+Template method in super class follows “the Hollywood principle”: “Don't call us, we'll call you”.
+This refers to the fact that instead of calling the methods from base class in the subclasses, the methods from subclass are
+called in the template method from superclass.
+
+Template method in super class should not be overriden so make it final
+
+Customization hooks:Methods containing a default implementation that may be overidden in other  classes are called hooks methods.
+Hook methods are intended to be overridden, concrete methods are not.So in this pattern,we can provide hooks methods.
+The problem is sometimes it becomes very hard to differentiate between hook methods and concrete methods.
+
+Java code:
+
+Below class contains template method called "parseDataAndGenerateOutput" which consists of steps for reading data,processing data and writing
+to csv file.
+
+1.DataParser.java
+
+package org.arpit.javapostsforlearning;
+
+abstract public class DataParser {
+
+    //Template method
+    //This method defines a generic structure for parsing data
+    public void parseDataAndGenerateOutput()
+    {
+        readData();
+        processData();
+        writeData();
+    }
+    //This methods will be implemented by its subclass
+    abstract void readData();
+    abstract void processData();
+
+    //We have to write output in a CSV file so this step will be same for all subclasses
+    public void writeData()
+    {
+        System.out.println("Output generated,writing to CSV");
+    }
+}
+
+
+package org.arpit.javapostsforlearning;
+
+public class CSVDataParser extends DataParser {
+
+    void readData() {
+        System.out.println("Reading data from csv file");
+    }
+    void processData() {
+        System.out.println("Looping through loaded csv file");
+    }
+}
+
+
+
+package org.arpit.javapostsforlearning;
+
+public class DatabaseDataParser extends DataParser {
+
+    void readData() {
+        System.out.println("Reading data from database");
+    }
+
+    void processData() {
+        System.out.println("Looping through datasets");
+    }
+}
+
+4.TemplateMethodMain.java
+
+view plainprint?
+package org.arpit.javapostsforlearning;
+
+public class TemplateMethodMain {
+
+    /**
+     * @author arpit mandliya
+     */
+    public static void main(String[] args) {
+
+        CSVDataParser csvDataParser=new CSVDataParser();
+        csvDataParser.parseDataAndGenerateOutput();
+        System.out.println("**********************");
+        DatabaseDataParser databaseDataParser=new DatabaseDataParser();
+        databaseDataParser.parseDataAndGenerateOutput();
+
+    }
+
+}

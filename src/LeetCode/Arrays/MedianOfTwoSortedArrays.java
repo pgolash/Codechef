@@ -1,5 +1,7 @@
 package LeetCode.Arrays;
 
+import java.util.Stack;
+
 /**
  * Created by prashantgolash on 19/01/16.
  */
@@ -48,5 +50,39 @@ public class MedianOfTwoSortedArrays {
         }
 
         return findKth(A, B, k, aStart, aEnd, bStart, bEnd);
+    }
+
+    public int calculate(String s) {
+        int sign = 1;
+        int prevSign = 1;
+        int totalSum = 0;
+        Stack<Integer> signStack = new Stack<>();
+        signStack.push(1);
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                signStack.push(signStack.peek() * prevSign);
+            } else if (s.charAt(i) == ')') {
+                signStack.pop();
+            } else if (s.charAt(i) == '+' || s.charAt(i) == '-' ) {
+                prevSign = s.charAt(i) == '+' ? 1 : -1;
+            } else {
+                totalSum += signStack.peek() * getNum(s, i);
+            }
+        }
+        return 1;
+    }
+
+    int getNum(String s, int idx) {
+        int num = 0;
+        while (idx < s.length()) {
+            if (s.charAt(idx) >= '0' && s.charAt(idx) <= '9') {
+                num = num * 10 + s.charAt(idx) - '0';
+                idx++;
+            } else {
+                break;
+            }
+        }
+        return num;
     }
 }

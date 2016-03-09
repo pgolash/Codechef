@@ -1,5 +1,8 @@
 package LeetCode.Tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by prashantgolash on 29/12/15.
  */
@@ -45,11 +48,34 @@ public class SerializeDeserializeBtree {
         }
     }
 
-    public static void main(String[] args) {
-        TreeNode root = new TreeNode(-1);
-        root.right = new TreeNode(1);
+    public List<List<Integer>> getFactors(int n) {
+        List<List<Integer>> x = new ArrayList<>();
+        List<Integer>y = new ArrayList<>();
+        getFactorsHelper(1, 2, y, x, n);
+        for (List<Integer> l : x) {
+            System.out.println(l);
+        }
+        return x;
+    }
 
-        String s = new SerializeDeserializeBtree().serialize(root);
-        TreeNode r = new SerializeDeserializeBtree().deserialize(s);
+    public void getFactorsHelper(int prod, int currNumber, List<Integer> currList, List<List<Integer>> answer, int target) {
+        if (prod > target) {
+            return;
+        } else if (prod == target) {
+            answer.add(new ArrayList<Integer>(currList));
+        } else {
+            for (int idx = currNumber; idx <= target / 2; idx++) {
+                if (target % (prod * idx) == 0) {
+                    currList.add(idx);
+                    getFactorsHelper(prod * idx, idx, currList, answer, target);
+                    currList.remove(currList.size() - 1);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SerializeDeserializeBtree s = new SerializeDeserializeBtree();
+        s.getFactors(20);
     }
 }

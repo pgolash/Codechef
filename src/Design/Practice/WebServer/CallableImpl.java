@@ -1,9 +1,5 @@
 package Design.Practice.WebServer;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpServer;
-
-import javax.xml.ws.spi.http.HttpHandler;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.concurrent.Callable;
@@ -11,7 +7,7 @@ import java.util.concurrent.Callable;
 /**
  * Created by prashantgolash on 9/13/15.
  */
-public class CallableImpl implements Callable{
+public class CallableImpl implements Callable {
 
     SocialHttpServer _server = null;
     Socket _socket = null;

@@ -1,7 +1,6 @@
 package LeetCode.Geometry;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by prashantgolash on 26/12/15.
@@ -30,7 +29,7 @@ public class MaxPointsOnALine {
         HashMap<Double, Integer> result = new HashMap<Double, Integer>();
         int max=0;
 
-        for(int i=0; i<points.length; i++){
+        for(int i=0; i < points.length; i++){
             int duplicate = 1;//
             int vertical = 0;
             for(int j=i+1; j<points.length; j++){
@@ -53,9 +52,9 @@ public class MaxPointsOnALine {
                 }
             }
 
-            for(Integer count: result.values()){
-                if(count+duplicate > max){
-                    max = count+duplicate;
+            for(Integer count : result.values()){
+                if(count + duplicate > max){
+                    max = count + duplicate;
                 }
             }
 

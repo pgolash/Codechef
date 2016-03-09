@@ -1,7 +1,5 @@
 package LeetCode.Arrays;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
 /**
  * Created by prashant on 8/27/2015.
  */
@@ -24,9 +22,25 @@ public class MaxProductSubArray {
         System.out.println(new MaxProductSubArray().maxProduct(nums4));
         System.out.println(new MaxProductSubArray().maxProduct(nums5));
         System.out.println(new MaxProductSubArray().maxProduct(nums6));
-
-
     }
+
+    public int getLowRange(int[] nums, int low, int high,int number) {
+        if (nums[0] > number || nums[nums.length - 1] < number) {
+            return -1;
+        } else if (nums[0] == number) {
+            return 0;
+        } else {
+            int middle = (low + high) / 2;
+            if (nums[middle] == number && nums[middle - 1] < number) {
+                return middle;
+            } else if (nums[middle] <= number) {
+                return getLowRange(nums, low, middle - 1, number);
+            } else {
+                return getLowRange(nums, middle + 1, high, number);
+            }
+        }
+    }
+
 
     public int maxProduct(int[] arr) {
 

@@ -1,0 +1,25 @@
+
+Below code snippet provides the double checked locking implementation.
+
+public static ThreadSafeSingleton getInstanceUsingDoubleLocking(){
+    if(instance == null){
+        synchronized (ThreadSafeSingleton.class) {
+            if(instance == null){
+                instance = new ThreadSafeSingleton();
+            }
+        }
+    }
+    return instance;
+}
+
+protected Object readResolve() {
+    return getInstance();
+}
+
+[1] Problems with private constructors : Reflection affects them.
+[2] Problem with deserialization : Always provider readResolve()
+
+readResolve is used for replacing the object read from the stream.
+The only use I've ever seen for this is enforcing singletons; when an object is read, replace it with the singleton instance.
+This ensures that nobody can create another instance by serializing and deserializing the singleton.
+

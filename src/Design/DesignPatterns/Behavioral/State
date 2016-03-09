@@ -1,0 +1,98 @@
+State Interface
+
+First of all we will create State interface that will define the method that should be implemented by different concrete states and context class.
+
+State.java
+
+
+
+
+
+
+package com.journaldev.design.state;
+
+public interface State {
+
+    public void doAction();
+}
+Concrete State Implementations
+
+In our example, we can have two states – one for turning TV on and another to turn it off. So we will create two concrete state implementations for these behaviors.
+
+TVStartState.java
+-----------------
+package com.journaldev.design.state;
+public class TVStartState implements State {
+
+    @Override
+    public void doAction() {
+        System.out.println("TV is turned ON");
+    }
+
+}
+
+TVStopState.java
+----------------
+package com.journaldev.design.state;
+public class TVStopState implements State {
+
+    @Override
+    public void doAction() {
+        System.out.println("TV is turned OFF");
+    }
+
+}
+Now we are ready to implement our Context object that will change its behavior based on its internal state.
+
+Context Implementation
+
+TVContext.java
+--------------
+package com.journaldev.design.state;
+
+public class TVContext implements State {
+
+    private State tvState;
+
+    public void setState(State state) {
+        this.tvState=state;
+    }
+
+    public State getState() {
+        return this.tvState;
+    }
+
+    @Override
+    public void doAction() {
+        this.tvState.doAction();
+    }
+
+}
+Notice that Context also implements State and keep a reference of its current state and forwards the request to the state implementation.
+
+Test Program
+
+Now let’s write a simple program to test our implementation of TV Remote using State pattern.
+
+TVRemote.java
+-------------
+
+package com.journaldev.design.state;
+
+public class TVRemote {
+
+    public static void main(String[] args) {
+        TVContext context = new TVContext();
+        State tvStartState = new TVStartState();
+        State tvStopState = new TVStopState();
+
+        context.setState(tvStartState);
+        context.doAction();
+
+
+        context.setState(tvStopState);
+        context.doAction();
+
+    }
+
+}

@@ -32,10 +32,7 @@ public class ExcelStringToInteger {
     }
 
     public String getString(Integer num) {
-        char c = (char) ('A' + num % 26);
-        StringBuilder bld = new StringBuilder("" + c);
-        num = num / 26 - 1;
-
+        StringBuilder bld = new StringBuilder("");
         while (num >= 0) {
             char d = (char) ('A' + num % 26);
             StringBuilder bld1 = new StringBuilder(d + "" + bld);
@@ -44,5 +41,4 @@ public class ExcelStringToInteger {
         }
         return bld.toString();
     }
-
 }

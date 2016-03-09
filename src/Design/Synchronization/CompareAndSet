@@ -1,0 +1,74 @@
+Compare and Swap
+
+What Situations Compare And Swap is Intended to Support
+Compare And Swap As Atomic Operation
+
+Jakob Jenkov
+Last update: 2014-10-01
+
+Compare and swap is a technique used when designing concurrent algorithms. Basically, compare and swap compares an expected value to the concrete value of a variable, and if the concrete value of the variable is equals to the expected value, swaps the value of the variable for a new variable. Compare and swap may sound a bit complicated but it is actually reasonably simple once you understand it, so let me elaborate a bit further on the topic.
+
+What Situations Compare And Swap is Intended to Support
+A very commonly occurring patterns in programs and concurrent algorithms is the "check then act" pattern.
+The check then act pattern occurs when the code first checks the value of a variable and then acts based on that value. Here is a simple example:
+
+class MyLock {
+
+    private boolean locked = false;
+
+    public boolean lock() {
+        if(!locked) {
+            locked = true;
+            return true;
+        }
+        return false;
+    }
+}
+This code has many errors if it was to be used in a multithreaded application, but please ignore that for now.
+
+As you can see, the lock() method first checks if the locked member variable is equal to false (check),
+and if it is it sees locked to true (then act).
+
+If multiple threads had access to the same MyLock instance, the above lock() function would not be guaranteed to work.
+If a thread A checks the value of locked and sees that it is false, a thread B may also check the value of locked at exactly the same time.
+Or, in fact, at any time before thread A sets locked to false. Thus, both thread A and thread B may see locked as being false, and both will then act based on that information.
+
+To work properly in a multithreaded application, "check then act" operations must be atomic. By atomic is meant that both the "check" and "act" actions are executed as an atomic (non-dividable) block of code. Any thread that starts executing the block will finish executing the block without interference from other threads. No other threads can execute the atomic block at the same time.
+
+Here is the code example from earlier with the lock() method turned into an atomic block of code using the synchronized keyword:
+
+class MyLock {
+
+    private boolean locked = false;
+
+    public synchronized boolean lock() {
+        if(!locked) {
+            locked = true;
+            return true;
+        }
+        return false;
+    }
+}
+Now the lock() method is synchronized so only one thread can executed it at a time on the same MyLock instance. The lock() method is effectively atomic.
+
+The atomic lock() method is actually an example of "compare and swap". The lock() method compares the variable locked to the expected value false and if locked is equal to this expected value, it swaps the variable's value to true .
+
+Compare And Swap As Atomic Operation
+Modern CPUs have built-in support for atomic compare and swap operations. From Java 5 you can get access to these functions in the CPU via some of the new atomic classes in the java.util.concurrent.atomic package.
+
+Here is an example showing how to implement the lock() method shown earlier using the AtomicBoolean class:
+
+public static class MyLock {
+    private AtomicBoolean locked = new AtomicBoolean(false);
+
+    public boolean lock() {
+        return locked.compareAndSet(false, true);
+    }
+
+}
+Notice how the locked variable is no longer a boolean but an AtomicBoolean. This class has a compareAndSet() function which will compare the value of the AtomicBoolean instance to an expected value, and if has the expected value, it swaps the value with a new value. In this case it compares the value of locked to false and if it is false it sets the new value of the AtomicBoolean to true.
+
+The compareAndSet() method returns true if the value was swapped, and false if not.
+
+The advantage of using the compare and swap features that comes with Java 5+ rather than implementing your own is that the compare and swap features built into Java 5+ lets you utilize the underlying compare and swap features of the CPU your application is running on. This makes your compare and swap code faster.
+

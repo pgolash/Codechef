@@ -32,11 +32,12 @@ public class WordLadder {
             }
 
             char[] arr = word.toCharArray();
-            for(int i=0; i<arr.length; i++){
-                for(char c='a'; c<='z'; c++){
+            for(int i = 0; i < arr.length; i++){
+                for(char c = 'a'; c <= 'z'; c++){
                     char temp = arr[i];
-                    if(arr[i]!=c){
-                        arr[i]=c;
+
+                    if(arr[i] != c){
+                        arr[i] = c;
                     }
 
                     String newWord = new String(arr);
