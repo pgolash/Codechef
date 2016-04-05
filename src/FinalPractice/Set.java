@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Created by prashantgolash on 30/01/16.
  */
-public class Set {
+public class Set{
     public void printSet(int[] set, int setIdx, int currIdx, int[] inputSet) {
         System.out.print("[");
 
@@ -520,9 +520,7 @@ public class Set {
 
     public int firstMissingPositive(int[] nums) {
         // seperate positive and negative
-
         int idx = 0;
-
         while (idx < nums.length) {
             if (nums[idx] <= 0) {
                 idx++;
@@ -556,15 +554,13 @@ public class Set {
 
     public List<List<Integer>> combinationSum3(int k, int n) {
         DP[][] sol = new DP[n + 1][k + 1];
-
         for (int i = 0 ; i <= n; i++) {
             for (int j = 0; j <= k; j++) {
                 sol[i][j] = new DP();
             }
         }
 
-        // solutions
-
+        // Solutions
         for (int i = 1; i <= 9; i++) {
             for (int sum = 1; sum <= n; sum++) {
                 if (i > sum) {
@@ -610,23 +606,157 @@ public class Set {
 
 
                     break;
-
-
             }
-
         }
-
         return "";
     }
 
 
-    public static void main(String[] args) {
-        Set s = new Set();
-        List<List<Integer>> x = s.combinationSum3(3, 7);
-        for (List<Integer> y : x) {
-            System.out.println(y);
+    // Shortest palindrome [Pinterest]
+    public String shortestPalindrome(String s) {
+        return null;
+    }
+
+    // 15 TopCoder questions
+
+    // K most frequent word in a file
+
+    // Enumerate all possible N X N grid of english letters [Pinterest]
+
+    // Anagrams.java [Pinterest]
+    public int getLongestAnagramDeriavative(String[] words) {
+        Map<Integer, HashSet<String>> wordMap = new HashMap<>();
+        Map<String, Integer> visited = new HashMap<>();
+        for (String word : words) {
+            char[] ch = word.toCharArray();
+            Arrays.sort(ch);
+            if (!wordMap.containsKey(word.length())) {
+                wordMap.put(word.length(), new HashSet<>());
+            }
+            wordMap.get(word.length()).add(ch.toString());
+        }
+        return -1;
+
+    }
+
+    public int longestAnagramDeriavative(Map<String, Integer> visited, Map<Integer, HashSet<String>> wordMap, String word, int minSize) {
+        if (word.length() < minSize) {
+            return 0;
+        } else if (visited.containsKey(word)) {
+            return visited.get(word);
+        } else {
+            int x = -1;
+            for (int i = 0; i < word.length(); i++) {
+                // remove char i
+                String toBeFound = word.substring(0, i) + word.substring(i + 1, word.length());
+                if (wordMap.containsKey(word.length())) {
+                    if (wordMap.get(word.length()).contains(toBeFound)) {
+                        x = longestAnagramDeriavative(visited, wordMap, toBeFound, minSize);
+                    }
+                }
+            }
+            if (x == -1) {
+                visited.put(word, x);
+            } else {
+                visited.put(word, word.length());
+            }
+        }
+        return -1;
+    }
+
+
+    // KPile Two Players [Pinterest]
+
+    // Add operators
+
+    // Basic Calculator
+
+
+    public List<String> addOperators(String num, int target) {
+        return null;
+    }
+
+    class Interval {
+        int start;
+        int end;
+    }
+
+    class IntervalComparator implements Comparator<Interval> {
+        public int compare(Interval i1, Interval i2) {
+            return i1.start - i2.start;
+        }
+    }
+
+    // Insert interval
+    public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+        intervals.sort(new IntervalComparator());
+        List<Interval> ansList = new ArrayList<>();
+
+        for (int i = 0 ; i < intervals.size(); i++) {
+            Interval currInterval = intervals.get(i);
+            if (newInterval.start <= currInterval.end) {
+                newInterval.start = Math.min(newInterval.start, currInterval.start);
+                newInterval.end = Math.max(newInterval.end, currInterval.end);
+            } else if (newInterval.end < currInterval.start) {
+                ansList.add(newInterval);
+                newInterval = currInterval;
+            } else {
+                ansList.add(currInterval);
+            }
+        }
+        ansList.add(newInterval);
+        return ansList;
+    }
+
+
+    // Radix sort
+    public void radixSort(int[] arr) {
+        int maxRadix = 3;
+
+        for (int radix = 1; radix <= maxRadix; radix++) {
+            int[] bArr = new int[arr.length];
+            int[] count = new int[10];
+
+            fillCount(arr, count, radix);
+            adjustCount(count);
+            populateArr(bArr, arr, count, radix);
+            arr = bArr;
         }
 
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+
+    public void fillCount(int[] arr, int[] count, int radix) {
+        for (int i = 0; i < arr.length; i++) {
+            count[getBin(arr[i], radix)]++;
+        }
+    }
+
+    public void adjustCount(int[] count) {
+        for (int i = 1; i < count.length; i++) {
+            count[i] += count[i - 1];
+        }
+    }
+
+    public int getBin(int num, int radix) {
+        int x = num / (int) Math.pow(10, radix - 1);
+        x = x % 10;
+        return x;
+    }
+
+    public void populateArr(int[] bArr, int[] arr, int[] count, int radix) {
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int bin = getBin(arr[i], radix);
+            bArr[count[bin] - 1] = arr[i];
+            count[bin]--;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[] {170, 45, 75, 90, 802, 2, 24, 66};
+        new Set().radixSort(arr);
     }
 
     public boolean isImage(TreeNode n1, TreeNode n2) {
