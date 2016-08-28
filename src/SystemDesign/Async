@@ -1,0 +1,9 @@
+	Event based 
+	
+	  Epoll    : https://banu.com/blog/2/how-to-use-epoll-a-complete-example-in-c/
+	  Libevent : https://github.com/jasonish/libevent-examples/blob/master/echo-server/libevent_echosrv1.c
+	  Nginx : http://www.aosabook.org/en/nginx.html
+	  Accept : http://www.tutorialspoint.com/unix_system_calls/accept.htm
+	  Select : http://man7.org/linux/man-pages/man2/select.2.html
+	  
+	  
