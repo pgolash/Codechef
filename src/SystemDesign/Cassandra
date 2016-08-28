@@ -1,15 +1,16 @@
 Cassandra system
 
-
+  Consistency - https://docs.datastax.com/en/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
+  Vnodes - http://www.datastax.com/dev/blog/virtual-nodes-in-cassandra-1-2
   Memtable
   Column
   ColumnFamily
   SSTable
   Accrual Failure Detectors
-  Gossip
-  Consistent hashing
+  Gossip - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureGossipAbout_c.html
+  Consistent hashing - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureDataDistributeReplication_c.html
   Bloom filter
-  Replication factor and Strategy
+  Replication factor and Strategy - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureDataDistributeReplication_c.html
   
   
   Read Path - http://wiki.apache.org/cassandra/ReadPathForUsers
