@@ -11,7 +11,7 @@ Cassandra system
   Consistent hashing - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureDataDistributeReplication_c.html
   Bloom filter
   Replication factor and Strategy - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureDataDistributeReplication_c.html
-  
+  Linearizable consistency [Light weight transactions] - http://www.datastax.com/dev/blog/lightweight-transactions-in-cassandra-2-0
   
   Read Path - http://wiki.apache.org/cassandra/ReadPathForUsers
   Write Path - http://docs.datastax.com/en/cassandra/2.0/cassandra/dml/dml_write_path_c.html
