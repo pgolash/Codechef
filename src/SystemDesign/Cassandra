@@ -17,4 +17,5 @@ Cassandra system
   Write Path - http://docs.datastax.com/en/cassandra/2.0/cassandra/dml/dml_write_path_c.html
   
   Secondary Index Cassandra : http://www.wentnet.com/blog/?p=77
+  Composite Keys : http://www.planetcassandra.org/blog/composite-keys-in-apache-cassandra/
   
