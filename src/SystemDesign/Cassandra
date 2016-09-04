@@ -19,5 +19,7 @@ Cassandra system
   Secondary Index Cassandra : http://www.wentnet.com/blog/?p=77
   Composite Keys : http://www.planetcassandra.org/blog/composite-keys-in-apache-cassandra/
   
+  Time series data Cassandra : https://academy.datastax.com/resources/getting-started-time-series-data-modeling
+  
   KillrChat : https://academy.datastax.com/resources/getting-started-killrchat-example-data-model-messaging
   
