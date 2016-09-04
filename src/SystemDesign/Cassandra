@@ -8,7 +8,7 @@ Cassandra system
   ColumnFamily
   SSTable
   Accrual Failure Detectors
-  Bloom filter
+  Bloom filter - https://en.wikipedia.org/wiki/Bloom_filter
   
   Gossip - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureGossipAbout_c.html
   Consistent hashing - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureDataDistributeReplication_c.html
