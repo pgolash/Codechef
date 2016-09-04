@@ -20,6 +20,7 @@ Cassandra system
   
   Secondary Index Cassandra : http://www.wentnet.com/blog/?p=77
   Composite Keys : http://www.planetcassandra.org/blog/composite-keys-in-apache-cassandra/
+                   http://planetcassandra.org/blog/flite-breaking-down-the-cql-where-clause/
   
   Use case:
   ========
