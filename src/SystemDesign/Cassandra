@@ -2,14 +2,16 @@ Cassandra system
 
   Consistency - https://docs.datastax.com/en/cassandra/2.0/cassandra/dml/dml_config_consistency_c.html
   Vnodes - http://www.datastax.com/dev/blog/virtual-nodes-in-cassandra-1-2
+  
   Memtable
   Column
   ColumnFamily
   SSTable
   Accrual Failure Detectors
+  Bloom filter
+  
   Gossip - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureGossipAbout_c.html
   Consistent hashing - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureDataDistributeReplication_c.html
-  Bloom filter
   Replication factor and Strategy - https://docs.datastax.com/en/cassandra/2.0/cassandra/architecture/architectureDataDistributeReplication_c.html
   Linearizable consistency [Light weight transactions] - http://www.datastax.com/dev/blog/lightweight-transactions-in-cassandra-2-0
   
@@ -18,6 +20,9 @@ Cassandra system
   
   Secondary Index Cassandra : http://www.wentnet.com/blog/?p=77
   Composite Keys : http://www.planetcassandra.org/blog/composite-keys-in-apache-cassandra/
+  
+  Use case:
+  ========
   
   Time series data Cassandra : https://academy.datastax.com/resources/getting-started-time-series-data-modeling
   
