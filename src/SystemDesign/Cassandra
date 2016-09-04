@@ -28,6 +28,6 @@ Cassandra system
   ========
   
   Time series data Cassandra : https://academy.datastax.com/resources/getting-started-time-series-data-modeling
-  
+  Messaging : http://docs.datastax.com/en/articles/cassandra/cassandrathenandnow.html
   KillrChat : https://academy.datastax.com/resources/getting-started-killrchat-example-data-model-messaging
   
