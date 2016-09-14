@@ -8,3 +8,8 @@ https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol#
 Example of Simple Producer : https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example
 
 https://kafka.apache.org/documentation.html#introduction
+
+A little more detail about consumer
+-----------------------------------
+
+http://www.confluent.io/blog/tutorial-getting-started-with-the-new-apache-kafka-0-9-consumer-client/
