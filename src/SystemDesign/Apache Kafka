@@ -13,3 +13,8 @@ A little more detail about consumer
 -----------------------------------
 
 http://www.confluent.io/blog/tutorial-getting-started-with-the-new-apache-kafka-0-9-consumer-client/
+
+
+Consumer commit
+---------------
+https://cwiki.apache.org/confluence/display/KAFKA/Committing+and+fetching+consumer+offsets+in+Kafka
