@@ -2,20 +2,18 @@ https://www.tutorialspoint.com/apache_kafka/apache_kafka_introduction.htm
 
 http://blog.cloudera.com/blog/2014/09/apache-kafka-for-beginners/
 
+Cwiki
+-----
 https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol#AGuideToTheKafkaProtocol-Network
-
-
 Example of Simple Producer : https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example
+Consumer offset commit : https://cwiki.apache.org/confluence/display/KAFKA/Committing+and+fetching+consumer+offsets+in+Kafka
 
+Kafka official documentation
+-----------------------------
 https://kafka.apache.org/documentation.html#introduction
+http://kafka.apache.org/documentation.html#theconsumer
 
 
 A little more detail about consumer [nice article]
 --------------------------------------------------
-
 http://www.confluent.io/blog/tutorial-getting-started-with-the-new-apache-kafka-0-9-consumer-client/
-
-
-Consumer commit
----------------
-https://cwiki.apache.org/confluence/display/KAFKA/Committing+and+fetching+consumer+offsets+in+Kafka
