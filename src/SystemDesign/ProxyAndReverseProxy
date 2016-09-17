@@ -12,3 +12,5 @@ The reverse proxy then decides where to send those requests, and returns the con
 A typical usage of a reverse proxy is to provide Internet users access to a server that is behind a firewall.
 Reverse proxies can also be used to balance load among several back-end servers, or to provide caching for
 a slower back-end server. In addition, reverse proxies can be used simply to bring several servers into the same URL space.
+
+http://www.jscape.com/blog/bid/87783/Forward-Proxy-vs-Reverse-Proxy
