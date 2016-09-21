@@ -17,7 +17,8 @@ Cassandra system
   
   Read Path - http://wiki.apache.org/cassandra/ReadPathForUsers
   Write Path - http://docs.datastax.com/en/cassandra/2.0/cassandra/dml/dml_write_path_c.html
-  
+
+  All about index, clustering and primary key : http://www.datastax.com/dev/blog/a-deep-look-to-the-cql-where-clause  
   Secondary Index Cassandra : http://www.wentnet.com/blog/?p=77
   Composite Keys : http://www.planetcassandra.org/blog/composite-keys-in-apache-cassandra/
                    http://planetcassandra.org/blog/flite-breaking-down-the-cql-where-clause/
