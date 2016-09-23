@@ -1,0 +1,6 @@
+Persistent http : https://en.wikipedia.org/wiki/HTTP_persistent_connection
+
+
+Comet : 
+http://www.javaworld.com/article/2077843/java-web-tier/java-se-asynchronous-http-comet-architectures.html?page=6
+https://www.quora.com/Why-would-HTTP-long-polling-be-used-instead-of-HTTP-Streaming-to-achieve-real-time-push-notifications
