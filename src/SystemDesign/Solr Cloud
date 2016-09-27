@@ -1,1 +1,7 @@
 
+Solr cloud : 
+  Shards and index :  https://cwiki.apache.org/confluence/display/solr/Shards+and+Indexing+Data+in+SolrCloud
+  Distributed request : https://cwiki.apache.org/confluence/display/solr/Distributed+Requests
+  Fault tolerance : https://cwiki.apache.org/confluence/display/solr/Read+and+Write+Side+Fault+Tolerance
+  
+  
