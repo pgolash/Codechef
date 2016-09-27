@@ -1,0 +1,7 @@
+Geohash : https://en.wikipedia.org/wiki/Geohash
+Solr indexing of geo data : 
+Old : http://blog.trifork.com/2009/08/03/geo-location-search-with-solr-and-lucene/
+New : http://wiki.apache.org/solr/SpatialSearch
+      https://cwiki.apache.org/confluence/display/solr/Spatial+Search
+      http://www.slideshare.net/lucenerevolution/lucene-solr-4-spatial-extended-deep-dive
+      
