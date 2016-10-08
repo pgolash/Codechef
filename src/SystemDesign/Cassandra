@@ -30,6 +30,6 @@ Cassandra system
   
   Time series data Cassandra : https://academy.datastax.com/resources/getting-started-time-series-data-modeling
                               https://github.com/killrweather/killrweather/wiki/4.-Time-Series-Data-Model
-  Messaging : http://docs.datastax.com/en/articles/cassandra/cassandrathenandnow.html
+  KillrVideo : https://academy.datastax.com/resources/datastax-reference-application-killrvideo
   KillrChat : https://academy.datastax.com/resources/getting-started-killrchat-example-data-model-messaging
   
