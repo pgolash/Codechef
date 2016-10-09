@@ -17,6 +17,8 @@ Cassandra system
   
   [Good] Read Path - http://wiki.apache.org/cassandra/ReadPathForUsers
   [Good] Write Path - http://docs.datastax.com/en/cassandra/2.0/cassandra/dml/dml_write_path_c.html
+  
+  [Consistency in cassandra] - http://mighty-titan.blogspot.com/2012/06/understanding-cassandras-consistency.html
 
   [Good] All about index, clustering and primary key : http://www.datastax.com/dev/blog/a-deep-look-to-the-cql-where-clause  
   Secondary Index Cassandra : http://www.wentnet.com/blog/?p=77
