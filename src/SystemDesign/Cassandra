@@ -26,6 +26,8 @@ Cassandra system
                    http://planetcassandra.org/blog/flite-breaking-down-the-cql-where-clause/
                    http://stackoverflow.com/questions/24949676/difference-between-partition-key-composite-key-and-clustering-key-in-cassandra
                    http://stackoverflow.com/questions/22077552/cassandra-cql-clustering-order-with-multiple-clustering-columns
+                   
+  Paxos in Cassandra : https://docs.datastax.com/en/cassandra/2.2/cassandra/dml/dmlLtwtTransactions.html
   
   Use case:
   ========
