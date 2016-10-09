@@ -1,11 +1,12 @@
 
 Recommender system : http://blogs.gartner.com/martin-kihn/how-to-build-a-recommender-system-in-python/
 
+http://www.cs.umd.edu/~samir/498/Amazon-Recommendations.pdf
+
+http://files.grouplens.org/papers/FnT%20CF%20Recsys%20Survey.pdf
+
+
 Content based filtering
 -----------------------
 https://en.wikipedia.org/wiki/K-means_clustering
-
-
-Colloborative filtering
------------------------
 
