@@ -51,3 +51,15 @@ Spring now now also has Async support for REST using AsyncRestTemplate.
 Almost all Javascript libraries support RESTful calls. Spring now has getting started guides for many Javascript frameworks for
 consuming RESTful services based on Spring as backend.
 For example, Spring REST with angular.js https://spring.io/guides/gs/consuming-rest-angularjs
+
+
+Authentication in Rest
+=======================
+How to handle authentication in a RESTful Client-Server architecture is a matter of debate.
+
+Commonly, it can be achieved, in the SOA over HTTP world via:
+
+HTTP basic auth over HTTPS;
+Cookies and session management;
+Token in HTTP headers (e.g. OAuth 2.0);
+Query Authentication with additional signature parameters.
